@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Shop | Web Native</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS STYLING --- */
+        
+         :root {
+            --bg-color: #ffe8ed;
+            --text-color: #333;
+            --accent-color: #e0e0e0;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --success-color: #4CAF50;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        /* Navigation */
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 50px;
+            background: rgb(248, 209, 217);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 26px;
+            cursor: pointer;
+        }
+        
+        .nav-links a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: black;
+            font-weight: 300;
+            text-transform: lowercase;
+            transition: 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+        
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .icon-btn {
+            cursor: pointer;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        
+        #cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff4d4d;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+        /* Hero Section */
+        
+        .hero-banner {
+            height: 450px;
+            background: url('Gemini_Generated_Image_chn2zcchn2zcchn2.png') center/cover;
+        }
+        
+        .hero-text {
+            padding: 40px 50px;
+        }
+        
+        .hero-text h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            margin: 0 0 15px 0;
+            font-weight: 400;
+        }
+        
+        .hero-text p {
+            max-width: 500px;
+            line-height: 1.6;
+            color: #666;
+        }
+        /* Container & Animations */
+        
+        .container {
+            padding: 40px 50px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Shop Grid */
+        
+        .shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .search-input {
+            border: none;
+            border-bottom: 1px solid #000;
+            padding: 5px;
+            width: 200px;
+            outline: none;
+            background: transparent;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 40px;
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            background: #f9f9f9;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .product-info {
+            margin-top: 15px;
+        }
+        
+        .add-btn {
+            background: none;
+            border: 1px solid #ccc;
+            padding: 5px 12px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            transition: 0.3s;
+        }
+        
+        .add-btn:hover {
+            background: #333;
+            color: white;
+        }
+        /* Detail Product Section */
+        
+        .detail-container {
+            display: flex;
+            gap: 80px;
+            align-items: flex-start;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .detail-image {
+            flex: 1;
+            min-width: 300px;
+            background: #f2f2f2;
+            padding: 40px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .detail-image img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+        
+        .detail-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .detail-info h2 {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            margin: 0 0 20px 0;
+            font-weight: 400;
+        }
+        
+        .detail-info p.description {
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .detail-info p.price-tag {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .back-arrow {
+            cursor: pointer;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: 0.2s;
+        }
+        
+        .back-arrow:hover {
+            transform: translateX(-5px);
+        }
+        /* Forms & Buttons */
+        
+        .btn-rect {
+            background: var(--accent-color);
+            border: none;
+            padding: 12px 40px;
+            cursor: pointer;
+            text-transform: lowercase;
+            transition: 0.3s;
+            font-family: var(--font-sans);
+        }
+        
+        .btn-rect:hover {
+            background: #333;
+            color: white;
+        }
+        
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px 0;
+            margin-bottom: 20px;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background: transparent;
+            outline: none;
+        }
+        
+        .form-flex {
+            display: flex;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+        
+        .form-col {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .divider {
+            border-left: 1px solid #eee;
+            padding-left: 80px;
+        }
+        /* Cart & Alert */
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        
+        .remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        #custom-alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border-left: 5px solid var(--success-color);
+            padding: 15px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 2000;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="custom-alert">pesan anda telah terkirim</div>
+
+    <nav>
+        <div class="logo" onclick="showPage('home')">beauty shop</div>
+        <div class="nav-links">
+            <a href="javascript:void(0)" onclick="showPage('home')">home</a>
+            <a href="javascript:void(0)" onclick="showPage('shop')">shop</a>
+            <a href="javascript:void(0)" onclick="showPage('contact')">contact</a>
+        </div>
+        <div class="nav-icons">
+            <div class="icon-btn" onclick="showPage('cart')">
+                🛒 <span id="cart-count">0</span>
+            </div>
+            <div class="icon-btn" onclick="showPage('login')" id="user-icon">👤</div>
+        </div>
+    </nav>
+
+    <div id="app"></div>
+
+    <script>
+        /* --- DATABASE PRODUK --- */
+        const products = [{
+            id: 1,
+            name: 'revlon foundation',
+            price: 150000,
+            img: 'e03c6798-9370-46aa-ba7f-9187950ffd4f.png',
+            desc: 'Revlon Illuminance Skin-Caring Foundation memberikan coverage matte yang nyaman dan tahan hingga 8 jam.'
+        }, {
+            id: 2,
+            name: 'loose powder',
+            price: 95000,
+            img: 'loosepowder.png',
+            desc: 'Maybelline Fit Me Loose Finishing Powder memberikan hasil soft-focus yang halus seharian.'
+        }, {
+            id: 3,
+            name: 'compact powder',
+            price: 450000,
+            img: 'compact powder.png',
+            desc: 'Dior Nude Air memberikan tekstur ultra-halus untuk hasil matte alami.'
+        }, {
+            id: 4,
+            name: 'liptint',
+            price: 620000,
+            img: 'liptint.png',
+            desc: 'Lip tint yang menghidrasi dengan warna alami yang tahan lama.'
+        }, {
+            id: 5,
+            name: 'mascara',
+            price: 135000,
+            img: 'mascara.png',
+            desc: 'Mascara Sky High memberikan volume dan panjang maksimal tanpa gumpalan.'
+        }, {
+            id: 6,
+            name: 'eyeshadow',
+            price: 850000,
+            img: 'eyeshadow.png',
+            desc: 'Palet eyeshadow Dior dengan pilihan warna elegan untuk riasan profesional.'
+        }, {
+            id: 7,
+            name: 'liquid blush',
+            price: 210000,
+            img: 'liquid blush.png',
+            desc: 'Liquid blush Rare Beauty yang sangat pigmented dan mudah dibaurkan.'
+        }, {
+            id: 8,
+            name: 'powder blush',
+            price: 185000,
+            img: 'powder blush.png',
+            desc: 'Powder blush yang memberikan rona alami yang lembut di pipi.'
+        }, {
+            id: 9,
+            name: 'highlighter',
+            price: 320000,
+            img: 'highlighter.png',
+            desc: 'Highlighter yang memberikan kilau sempurna pada poin-poin wajah.'
+        }, {
+            id: 10,
+            name: 'lipstick',
+            price: 115000,
+            img: 'lipstick.png',
+            desc: 'Lipstik matte klasik dengan warna intens dan kenyamanan maksimal.'
+        }, {
+            id: 11,
+            name: 'brow filler',
+            price: 90000,
+            img: 'browcara.png',
+            desc: 'Gimme Brow memberikan definisi dan volume pada alis Anda seketika.'
+        }, {
+            id: 12,
+            name: 'eyeliner',
+            price: 75000,
+            img: 'eyeliner.png',
+            desc: 'Eyeliner matte hitam pekat dengan presisi tinggi untuk garis yang tajam.'
+        }];
+
+        let cart = [];
+        let loggedInUser = null;
+        let usersDatabase = JSON.parse(localStorage.getItem('users')) || [];
+
+        function formatIDR(num) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(num);
+        }
+
+        function showAlert(msg) {
+            const alertBox = document.getElementById('custom-alert');
+            alertBox.innerText = msg;
+            alertBox.style.display = 'block';
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+            }, 3000);
+        }
+
+        function showPage(page) {
+            const app = document.getElementById('app');
+            window.scrollTo(0, 0);
+
+            if (page === 'home') {
+                app.innerHTML = `
+                    <div class="hero-banner"></div>
+                    <div class="hero-text">
+                        <h1>your beauty, your choice</h1>
+                        <p>Welcome to Beauty Shop — your space for simple, natural, and confident beauty.</p>
+                        <button class="btn-rect" onclick="showPage('shop')" style="float:right">shop now</button>
+                    </div>`;
+            } else if (page === 'shop') {
+                app.innerHTML = `
+                    <div class="container">
+                        <div class="shop-header">
+                            <h2 style="font-family:var(--font-serif); font-size: 2.5rem; font-weight:400;">shop</h2>
+                            <input type="text" class="search-input" placeholder="search..." onkeyup="searchProduct(this.value)">
+                        </div>
+                        <div class="product-grid" id="product-list"></div>
+                    </div>`;
+                renderProducts(products);
+            } else if (page === 'contact') {
+                app.innerHTML = `
+                    <div class="container" style="max-width: 900px;">
+                        <h2 style="font-family:var(--font-serif); font-size: 2.5rem; font-weight:400; margin-bottom:50px;">CONTACT US</h2>
+                        <form onsubmit="handleContact(event)">
+                            <input type="text" placeholder="name" required>
+                            <input type="email" placeholder="email" required>
+                            <textarea placeholder="message" rows="4" required></textarea>
+                            <button type="submit" class="btn-rect" style="float:right">send message</button>
+                        </form>
+                    </div>`;
+            } else if (page === 'login') {
+                loggedInUser ? renderProfilePage() : renderAuthPage();
+            } else if (page === 'cart') {
+                renderCartPage();
+            }
+        }
+
+        function renderProducts(data) {
+            const list = document.getElementById('product-list');
+            list.innerHTML = data.map(p => `
+                <div class="product-card">
+                    <img src="${p.img}" onclick="showDetail(${p.id})">
+                    <div class="product-info">
+                        <h4 onclick="showDetail(${p.id})" style="cursor:pointer">${p.name}</h4>
+                        <p>(${formatIDR(p.price)})</p>
+                        <button class="add-btn" onclick="addToCart(${p.id})">Add to Bag</button>
+                    </div>
+                </div>`).join('');
+        }
+
+        function showDetail(id) {
+            const p = products.find(x => x.id === id);
+            document.getElementById('app').innerHTML = `
+                <div class="container">
+                    <div class="back-arrow" onclick="showPage('shop')">←</div>
+                    <div class="detail-container">
+                        <div class="detail-image"><img src="${p.img}"></div>
+                        <div class="detail-info">
+                            <h2>${p.name}</h2>
+                            <p class="description">${p.desc}</p>
+                            <p class="price-tag">(${formatIDR(p.price)})</p>
+                            <button class="btn-rect" onclick="addToCart(${p.id})">add to cart</button>
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        function addToCart(id) {
+            if (!loggedInUser) {
+                alert("Anda harus login terlebih dahulu!");
+                showPage('login');
+                return;
+            }
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            document.getElementById('cart-count').innerText = cart.length;
+            showAlert(product.name + " ditambahkan ke keranjang");
+        }
+
+        function renderCartPage() {
+            const app = document.getElementById('app');
+            if (cart.length === 0) {
+                app.innerHTML = `<div class="container" style="text-align:center; padding: 100px;"><h2>TAS ANDA KOSONG</h2><button class="btn-rect" onclick="showPage('shop')">BELANJA SEKARANG</button></div>`;
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            app.innerHTML = `
+                <div class="container">
+                    <h2 style="font-family:var(--font-serif); font-size: 2.5rem; font-weight:400;">YOUR BAG</h2>
+                    <div>${cart.map((item, index) => `
+                        <div class="cart-item">
+                            <div style="display:flex; align-items:center; gap:20px;">
+                                <img src="${item.img}">
+                                <div><h4>${item.name}</h4><p>${formatIDR(item.price)}</p></div>
+                            </div>
+                            <button class="remove-btn" onclick="removeFromCart(${index})">✕</button>
+                        </div>`).join('')}
+                    </div>
+                    <div style="text-align:right; margin-top:50px;">
+                        <h3>Total: ${formatIDR(total)}</h3>
+                        <button class="btn-rect" onclick="handleCheckout()">checkout</button>
+                    </div>
+                </div>`;
+        }
+
+        /* --- LOGIKA BARU: CHECKOUT & CLEAR CART --- */
+        function handleCheckout() {
+            // Tampilkan pesan sukses
+            alert('Checkout Berhasil! Terima kasih telah berbelanja.');
+
+            // Kosongkan array keranjang
+            cart = [];
+
+            // Update angka di icon keranjang (Navigasi)
+            document.getElementById('cart-count').innerText = "0";
+
+            // Tampilkan kembali halaman keranjang (yang sekarang sudah kosong)
+            renderCartPage();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            document.getElementById('cart-count').innerText = cart.length;
+            renderCartPage();
+        }
+
+        function renderAuthPage() {
+            document.getElementById('app').innerHTML = `
+                <div class="container">
+                    <div class="form-flex">
+                        <div class="form-col">
+                            <h2>SIGN IN</h2>
+                            <form onsubmit="handleLogin(event)">
+                                <input type="email" id="l-email" placeholder="email" required>
+                                <input type="password" id="l-pass" placeholder="password" required>
+                                <button type="submit" class="btn-rect">SIGN IN</button>
+                            </form>
+                        </div>
+                        <div class="form-col divider">
+                            <h2>NEW ACCOUNT</h2>
+                            <form onsubmit="handleRegister(event)">
+                                <input type="text" id="r-name" placeholder="name" required>
+                                <input type="email" id="r-email" placeholder="email" required>
+                                <input type="password" id="r-pass" placeholder="password" required>
+                                <button type="submit" class="btn-rect">REGISTER</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = usersDatabase.find(u => u.email === document.getElementById('l-email').value && u.pass === document.getElementById('l-pass').value);
+            if (user) { 
+                loggedInUser = user; 
+                document.getElementById('user-icon').innerText = "👤 " + user.name.split(' ')[0];
+                showPage('home');
+                showAlert("selamat datang " + user.name);
+            } else alert("email atau password salah!");
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const email = document.getElementById('r-email').value;
+            if (usersDatabase.find(u => u.email === email)) return alert("email sudah terdaftar!");
+            usersDatabase.push({ name: document.getElementById('r-name').value, email, pass: document.getElementById('r-pass').value });
+            localStorage.setItem('users', JSON.stringify(usersDatabase));
+            alert("berhasil mendaftar! silahkan login.");
+            showPage('login');
+        }
+
+        function handleContact(e) {
+            e.preventDefault();
+            showAlert("pesan anda telah terkirim");
+            e.target.reset();
+        }
+
+        function searchProduct(q) {
+            renderProducts(products.filter(p => p.name.toLowerCase().includes(q.toLowerCase())));
+        }
+
+        window.onload = () => showPage('home');
+    </script>
+</body>
+
+</html>
